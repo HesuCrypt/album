@@ -474,6 +474,15 @@
         .empty-state p {
             font-size: 16px;
         }
+
+        /* Responsive video for mobile */
+        .optimized-video {
+            max-width: 100%;
+            height: auto;
+            aspect-ratio: 16/9;
+            background: #000;
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -829,7 +838,7 @@
                     ${isLoggedIn ? `<button class="delete-btn" onclick="deleteItem('${item.id}')">&times;</button>` : ''}
                     ${item.type === 'photo' 
                         ? `<img class="media-content" src="${item.src}" alt="${item.name}" onclick="openModal('${item.src}')">`
-                        : `<video class="media-content" src="${item.src}" controls></video>`
+                        : `<video class="media-content optimized-video" src="${item.src}" controls playsinline autoplay muted preload="metadata" poster="" onclick="toggleVideoPlay(this)"></video>`
                     }
                     <div class="media-info">
                         <div class="media-date">
@@ -841,6 +850,15 @@
                     </div>
                 </div>
             `).join('');
+        }
+
+        // Toggle video play/pause on tap (for mobile)
+        function toggleVideoPlay(video) {
+            if (video.paused) {
+                video.play();
+            } else {
+                video.pause();
+            }
         }
 
         // Open modal
