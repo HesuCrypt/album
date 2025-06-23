@@ -561,12 +561,14 @@
                 mediaItems = [];
             }
         }
-        // Manually add static videos if not present
+        // Remove any .mov video entries from mediaItems
+        mediaItems = mediaItems.filter(item => !(item.type === 'video' && item.name.endsWith('.mov')));
+        // Update static videos to use .mp4
         const staticVideos = [
-            { name: 'v1.mov', src: 'v1.mov' },
-            { name: 'v2.mov', src: 'v2.mov' },
-            { name: 'v3.mov', src: 'v3.mov' },
-            { name: 'v4.mov', src: 'v4.mov' }
+            { name: 'v1.mp4', src: 'v1.mp4' },
+            { name: 'v2.mp4', src: 'v2.mp4' },
+            { name: 'v3.mp4', src: 'v3.mp4' },
+            { name: 'v4.mp4', src: 'v4.mp4' }
         ];
         const today = new Date().toISOString().split('T')[0];
         let changed = false;
